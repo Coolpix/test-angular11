@@ -1,0 +1,694 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>cajamar-base-app documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">cajamar-base-app documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="aplicación-base-angular-9-para-bcc-cajamar">Aplicación base Angular 9 para BCC Cajamar</h1>
+<h2 id="indice">Indice</h2>
+<p><a href="#Introducci%C3%B3n">Introducción</a></p>
+<p><a href="#Requisitos">Requisitos</a></p>
+<p><a href="#Instalaci%C3%B3n">Instalación</a></p>
+<p><a href="#estructura-del-proyecto">Estructura del proyecto</a></p>
+<p><a href="#ficheros-mas-destacables">Ficheros más destacables</a></p>
+<p><a href="#package.json">Package.json</a></p>
+<p><a href="#Testing">Testing</a></p>
+<p><a href="#Paquetizado">Paquetizado</a></p>
+<p><a href="#servidor-de-desarrollo">Servidor de desarrollo</a></p>
+<p><a href="#Compodoc">Construir documentación con Compodoc</a></p>
+<p><a href="#Prettier">Verificación de código con Prettier</a></p>
+<p><a href="#Versionado">Versionado package.json</a></p>
+<p><a href="#DoD">pruebas DoD</a></p>
+<h2 id="introducción">Introducción</h2>
+<p>Código base de una aplicación basada en Angular 9 creada con @angular/cli.</p>
+<p>Este código sirve de base para las aplicaciones generadas a partir del generador basado en Yeoman.</p>
+<h2 id="requisitos">Requisitos</h2>
+<p>Los requisitos mínimos y obligatorios para ejecutar correctamente el generador son:</p>
+<ul>
+<li><p>NPM</p>
+</li>
+<li><p><a href="https://git-scm.com/">Git</a></p>
+</li>
+</ul>
+<p>La recomendación es tener todos instalados en sus últimas versiones LTS.</p>
+<h2 id="instalación">Instalación</h2>
+<p>Aunque no es recomendable usar directamente el código de esta aplicación, ya que para ello deberiamos generar una nueva con el generador de proyectos, los pasos a seguir para usar este código base son los siguientes:</p>
+<ul>
+<li><p>Clonado del código del repositorio donde se aloje el proyecto base.</p>
+</li>
+<li><p>Ejecución de script de instalación.</p>
+<div><pre class="line-numbers"><code class="language-javascript">npm install
+npm audit fix --force
+</code></pre></div></li>
+</ul>
+<h2 id="estructura-del-proyecto">Estructura del proyecto</h2>
+<p>La estructura del proyecto base es la siguiente:</p>
+<div><pre class="line-numbers"><code class="language-none">./
+|----/e2e
+|      |---/src
+|      |-----|----app.e2e-spec.ts
+|      |-----|----app.po.ts
+|      |----protractor.conf.js
+|      |----tsconfig.e2e.json
+|----/src
+|      |----/app
+|      |-----|app.component.html
+|      |-----|app.component.scss
+|      |-----|app.component.spec.ts
+|      |-----|app.component.ts
+|      |-----|app.module.ts
+|      |-----|app-routing.module.ts
+|      |----/assets
+|      |------|.gitkeep
+|      |----/environments
+|      |----------|environment.prod.ts
+|      |----------|environment.ts
+|      |----browserslist
+|      |----favicon.ico
+|      |----index.html
+|      |----main.ts
+|      |----polyfills.ts
+|      |----styles.css
+|      |----test.ts
+|----.editorconfig
+|----.eslintrc.js
+|----.gitignore
+|----.prettierignore
+|----angular.json
+|----browserlist
+|----CHANGELOG.md
+|----commitlint.config.js
+|----custom.root.json
+|----Jenkinsfile
+|----package.json
+|----package-lock.json
+|----README.md
+|----setupJest.ts
+|----tsconfig.json
+|----tsconfig.app.json
+|----tsconfig.spec.json
+|----yarn.lock
+</code></pre></div><h2 id="ficheros-más-destacables">Ficheros más destacables</h2>
+<p>Como ficheros a destacar dentro del proyecto base tenemos los siguientes:</p>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Ficheros/Carpeta</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>protractor.conf.js</td>
+<td>Fichero de configuración para nuestros test end-to-end.</td>
+</tr>
+<tr>
+<td>/environments</td>
+<td>Carpeta donde se encuentran nuestros ficheros de propiedades por entornos.</td>
+</tr>
+<tr>
+<td>karma.conf.js</td>
+<td>Fichero de configuración para nuestros test unitarios.</td>
+</tr>
+<tr>
+<td>tsconfig.app.json</td>
+<td>Fichero que extiende la configuración general de Typescript para añadir nuevas reglas que solo afectan a la aplicación Angular.</td>
+</tr>
+<tr>
+<td>angular.json</td>
+<td>Fichero de configuración de Angular</td>
+</tr>
+<tr>
+<td>Jenkinsfile</td>
+<td>Fichero declarativo de nuestro pipeline como código.</td>
+</tr>
+<tr>
+<td>package.json</td>
+<td>Fichero que describe la totalidad de nuestra aplicación NPM (ver apartado propio).</td>
+</tr>
+<tr>
+<td>sonar-project.properties</td>
+<td>Fichero de propiedades de Sonar</td>
+</tr>
+<tr>
+<td>tsconfig.json</td>
+<td>Fichero de configuración de Typescript</td>
+</tr>
+</tbody>
+</table>
+<h2 id="packagejson">Package.json</h2>
+<p>El fichero package.json es el fichero que define la totalidad del proyecto en el que estamos trabajando.</p>
+<p>La definición del fichero que existe en nuestro proyecto base es el siguiente:</p>
+<div><pre class="line-numbers"><code class="language-javascript">{
+  &quot;name&quot;: &quot;cajamar-base-app&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;scripts&quot;: {
+    &quot;ng&quot;: &quot;ng&quot;,
+    &quot;start&quot;: &quot;ng serve&quot;,
+    &quot;build&quot;: &quot;ng build --prod&quot;,
+    &quot;test&quot;: &quot;node node_modules/.bin/rimraf coverage &amp;&amp; ng test --watch=false --code-coverage --progress=false --browsers=Chrome&quot;,
+    &quot;lint&quot;: &quot;ng lint&quot;,
+    &quot;e2e&quot;: &quot;ng e2e&quot;,
+    &quot;sonar&quot;: &quot;node node_modules/.bin/sonar-scanner&quot;,
+    &quot;format:fix&quot;: &quot;pretty-quick --staged&quot;,
+    &quot;precommit&quot;: &quot;run-s format:fix lint&quot;,
+    &quot;compodoc&quot;: &quot;./node_modules/.bin/compodoc -p tsconfig.json&quot;,
+    &quot;prettier&quot;: &quot;npx prettier --write .&quot;,
+    &quot;release&quot;: &quot;standard-version&quot;
+  },
+  &quot;private&quot;: true,
+  &quot;dependencies&quot;: {
+    &quot;&#64;angular/animations&quot;: &quot;9.1.12&quot;,
+    &quot;&#64;angular/cdk&quot;: &quot;9.2.4&quot;,
+    &quot;&#64;angular/common&quot;: &quot;9.1.12&quot;,
+    &quot;&#64;angular/compiler&quot;: &quot;9.1.12&quot;,
+    &quot;&#64;angular/core&quot;: &quot;9.1.12&quot;,
+    &quot;&#64;angular/forms&quot;: &quot;9.1.12&quot;,
+    &quot;&#64;angular/material&quot;: &quot;9.2.4&quot;,
+    &quot;&#64;angular/platform-browser&quot;: &quot;9.1.12&quot;,
+    &quot;&#64;angular/platform-browser-dynamic&quot;: &quot;9.1.12&quot;,
+    &quot;&#64;angular/router&quot;: &quot;9.1.12&quot;,
+    &quot;core-js&quot;: &quot;3.6.5&quot;,
+    &quot;rxjs&quot;: &quot;6.5.4&quot;,
+    &quot;tslib&quot;: &quot;1.10.0&quot;,
+    &quot;zone.js&quot;: &quot;0.10.3&quot;
+  },
+  &quot;devDependencies&quot;: {
+ &quot;&#64;angular-devkit/build-angular&quot;: &quot;0.901.11&quot;,
+    &quot;&#64;angular/cli&quot;: &quot;9.1.11&quot;,
+    &quot;&#64;angular/compiler-cli&quot;: &quot;9.1.12&quot;,
+    &quot;&#64;commitlint/cli&quot;: &quot;9.1.2&quot;,
+    &quot;&#64;commitlint/config-conventional&quot;: &quot;9.1.1&quot;,
+    &quot;&#64;types/jasmine&quot;: &quot;3.5.12&quot;,
+    &quot;&#64;types/jasminewd2&quot;: &quot;2.0.8&quot;,
+    &quot;&#64;types/jest&quot;: &quot;26.0.7&quot;,
+    &quot;&#64;types/node&quot;: &quot;12.11.1&quot;,
+    &quot;&#64;typescript-eslint/eslint-plugin&quot;: &quot;3.7.1&quot;,
+    &quot;&#64;typescript-eslint/parser&quot;: &quot;3.7.1&quot;,
+    &quot;compodoc&quot;: &quot;0.0.41&quot;,
+    &quot;cz-conventional-changelog&quot;: &quot;3.2.0&quot;,
+    &quot;eslint&quot;: &quot;7.5.0&quot;,
+    &quot;eslint-config-google&quot;: &quot;0.14.0&quot;,
+    &quot;eslint-config-prettier&quot;: &quot;6.11.0&quot;,
+    &quot;eslint-plugin-prettier&quot;: &quot;3.1.4&quot;,
+    &quot;husky&quot;: &quot;4.2.5&quot;,
+    &quot;jest&quot;: &quot;26.1.0&quot;,
+    &quot;jest-preset-angular&quot;: &quot;8.2.1&quot;,
+    &quot;jasmine-core&quot;: &quot;3.6.0&quot;,
+    &quot;jasmine-spec-reporter&quot;: &quot;5.0.2&quot;,
+    &quot;npm-run-all&quot;: &quot;4.1.5&quot;,
+    &quot;prettier&quot;: &quot;2.0.5&quot;,
+    &quot;pretty-quick&quot;: &quot;2.0.1&quot;,
+    &quot;protractor&quot;: &quot;7.0.0&quot;,
+    &quot;rimraf&quot;: &quot;3.0.2&quot;,
+    &quot;sonarqube-scanner&quot;: &quot;2.7.0&quot;,
+    &quot;standard-version&quot;: &quot;8.0.2&quot;,
+    &quot;ts-node&quot;: &quot;8.3.0&quot;,
+    &quot;typescript&quot;: &quot;3.8.3&quot;
+  },
+  &quot;jest&quot;: {
+    &quot;preset&quot;: &quot;jest-preset-angular&quot;,
+    &quot;setupTestFrameworkScriptFile&quot;: &quot;&lt;rootDir&gt;/setupJest.ts&quot;
+  },
+  &quot;husky&quot;: {
+    &quot;hooks&quot;: {
+      &quot;commit-msg&quot;: &quot;commitlint -E HUSKY_GIT_PARAMS&quot;
+    }
+  },
+  &quot;lint-staged&quot;: {
+    &quot;**/*&quot;: [
+      &quot;eslint --fix&quot;,
+      &quot;prettier --write&quot;
+    ]
+  }
+}
+</code></pre></div><table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Sección del fichero</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>Nombre del proyecto.</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Versión del proyecto que estamos desarrollando.</td>
+</tr>
+<tr>
+<td>scripts</td>
+<td>Conjunto de scripts NPM que ejecutan ciertas tareas asociadas.</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Dependencias que son requeridas para la correcta ejecución de nuestra aplicación.</td>
+</tr>
+<tr>
+<td>DevDepencies</td>
+<td>Dependencias que son requeridas solo en tiempo de desarrollo. No estarán incluidas dentro del distribuible final.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="testing">Testing</h2>
+<p>Dentro del proyecto base se crearán por defecto configuraciones para dos tipos de testing distintos, tendremos test tanto unitarios como ebd-to-end.</p>
+<p>Los test unitarios se ejecutaran bajo Karma JS y los test end-to-end serán ejecutados con protractor.</p>
+<p>Para la ejecución de los test tenemos disponibles dos scripts distintos</p>
+<p>Ejecución de test unitarios:</p>
+<div><pre class="line-numbers"><code class="language-bash">npm run test
+npm run test:coverage</code></pre></div><p>Ejecución de test end-to-end:</p>
+<div><pre class="line-numbers"><code class="language-bash">ng e2e</code></pre></div><p>Ambas ejecuciones crearán diversas carpetas al ejecutarse y ejecutar los test correctamente.</p>
+<p>Los test unitarios crearán una carpeta &quot;coverage&quot;, en la cual tendremos disponibles los reportes de cobertura de nuestros test unitarios</p>
+<p>Los test end-to-end crearán una carpeta &quot;protractorReports&quot;, en la cual tendremos disponibles los informes sobre la ejecución de nuestros test end-to-end.</p>
+<h2 id="paquetizado">Paquetizado</h2>
+<p>Dentro de nuestra aplicación base tenemos disponibles dos modos distintos de paquetizado, dependientes del entorno donde se quiera ejecutar la aplicación</p>
+<p>En caso de que se quiera generar un paquetizado para un entorno de desarrollo usaremos el siguiente comando</p>
+<div><pre class="line-numbers"><code class="language-bash">ng build</code></pre></div><p>Si lo que queremos es generar el distribuible que debería ser desplegado en producción, ejecutaremos el comando</p>
+<div><pre class="line-numbers"><code class="language-bash">npm run build</code></pre></div><p>Ambos comandos nos generarán una carpeta &quot;dist&quot; dentro del raíz de nuestro proyecto, en la que encontraremos la aplicación preparada para depslegar en un servidor.</p>
+<p>Notesé de que la ejecución de estos comandos generará una aplicación con las propiedades determinadas por cada entorno, es decir, si ejecutamos el script para generar la aplicación de desarrollo, usaremos el environments de desarrollo, pero si ejecutamos el script para producción, usarermos el fichero de propiedades de producción.</p>
+<h2 id="servidor-de-desarrollo">Servidor de desarrollo</h2>
+<p>Dentro de la aplicación base tenemos un script que lanzará un servidor en local para usar en tiempo de desarrollo.</p>
+<p>Para lanzar el servidor de desarrollo tenemos que ejecutar el siguiente comando, el cual nos abrirá automaticamente una pestaña dentro de nuestro navegador con nuestra aplicación ejecutandose.</p>
+<div><pre class="line-numbers"><code class="language-bash">ng serve -o</code></pre></div><p>En caso de que queramos abrir la URL manualmente en otro navegador, la URL por defecto que se expone al ejecutar el servidor de desarrollo es la siguiente:</p>
+<div><pre class="line-numbers"><code class="language-none">http://localhost:4200</code></pre></div><h2 id="construir-documentación-con-compodoc">Construir documentación con Compodoc</h2>
+<p>Podemos construir documentación con Compodoc con la siguiente instrucción:</p>
+<div><pre class="line-numbers"><code class="language-bash">npm run compodoc</code></pre></div><h2 id="verificación-de-código-con-prettier">Verificación de código con Prettier</h2>
+<p>Primero incluya en el archivo .prettierignore los ficheros que deberan de ser obviados por prettier.
+Seguidamente lance la siguiente instrucción:</p>
+<div><pre class="line-numbers"><code class="language-bash">npm run prettier</code></pre></div><h2 id="versionado-packagejson">Versionado package.json</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>install</th>
+<th>Libreria</th>
+<th>Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dependencies</td>
+<td>@angular/animations</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>@angular/cdk</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>@angular/common</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>@angular/core</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>@angular/forms</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>@angular/material</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>@angular/platform-browser</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>@angular/platform-browser-dynamic</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>@angular/router</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>rxjs</td>
+<td>6.5.4</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>tslib</td>
+<td>1.10.0</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>zone.js</td>
+<td>0.10.3</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@angular-devkit/build-angular</td>
+<td>0.901.12</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@angular-devkit/build-ng-packagr</td>
+<td>0.901.12</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@angular/cli</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@angular/compiler-cli</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@angular/language-service</td>
+<td>9.1.12</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@commitlint/cli</td>
+<td>9.1.2</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@commitlint/config-conventional</td>
+<td>9.1.1</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@compodoc/compodoc</td>
+<td>1.1.11</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@types/jasmine</td>
+<td>3.5.12</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@types/jasminewd2</td>
+<td>2.0.8</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@types/jest</td>
+<td>26.0.7</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@types/node</td>
+<td>12.11.1</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@typescript-eslint/eslint-plugin</td>
+<td>3.7.1</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>@typescript-eslint/parser</td>
+<td>3.7.1</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>cz-conventional-changelog</td>
+<td>3.2.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>eslint</td>
+<td>7.5.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>eslint-config-google</td>
+<td>0.14.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>eslint-config-prettier</td>
+<td>6.11.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>eslint-plugin-prettier</td>
+<td>3.1.4</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>husky</td>
+<td>4.2.5</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>jasmine-reporters</td>
+<td>2.3.2</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>jest</td>
+<td>26.1.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>jest-preset-angular</td>
+<td>8.2.1</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>ng-packagr</td>
+<td>9.0.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>prettier</td>
+<td>2.0.5</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>prettier-eslint</td>
+<td>11.0.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>protractor</td>
+<td>7.0.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>protractor-html-reporter-2</td>
+<td>1.0.4</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>standard-version</td>
+<td>8.0.2</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>sonarqube-scanner</td>
+<td>2.7.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>ts-jest</td>
+<td>26.1.4</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>ts-node</td>
+<td>8.3.0</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>typescript</td>
+<td>3.8.3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pruebas-dod">Pruebas DoD</h2>
+<p>El proyecto ha pasado unas pruebas DoD, la siguiente tabla las resume:</p>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Prueba/script</th>
+<th>Action</th>
+<th>APTO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>npm i</td>
+<td>Se instala correctamente</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>npm audit fix --force</td>
+<td>Lanza el auditor de dependencias</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>ng serve</td>
+<td>El proyecto se lanza</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>ng build</td>
+<td>El proyecto compila para desarrollo</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>ng build --prod</td>
+<td>El proyecto compila para produccion</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>npm run test</td>
+<td>Pasa los test</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>npm run test:coverage</td>
+<td>Crea carpeta coverage con jest</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>npm run lint</td>
+<td>Pasa los linters</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>npm run compodoc</td>
+<td>Crea documentacion con compodoc</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>npm run prettier</td>
+<td>Pasa el lintado de prettier</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>npm run release</td>
+<td>Crea release</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>npm run sonar</td>
+<td>Lanza pruebas sonar</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>ng e2e</td>
+<td>Lanza pruebas e2e con protractor</td>
+<td>OK</td>
+</tr>
+<tr>
+<td>ng e2e</td>
+<td>Crea reporte con protractor</td>
+<td>OK</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

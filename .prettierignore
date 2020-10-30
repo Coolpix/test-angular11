@@ -1,0 +1,16 @@
+build
+coverage
+documentation
+dist
+protractor-report
+**/*.spec.ts
+node_modules*
+dist*
+*.svg
+*.ico
+.gitignore
+*.md
+*.log
+*.lock
+.eslintignore
+.prettierignore
